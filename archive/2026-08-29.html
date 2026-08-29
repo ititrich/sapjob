@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP 채용 브리핑 · 2026-08-29</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.0.13/index.css" />
+<style>
+  :root{
+    --bg:#f5f3ee;
+    --card-bg:#ffffff;
+    --ink:#1b1b1b;
+    --ink-soft:#5b5b5b;
+    --line:#e4e0d6;
+    --navy:#16304d;
+    --green:#1E7A5A;
+    --orange:#D9541E;
+    --chip-bg:#eef1f4;
+    --chip-ink:#39485a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Pretendard","-apple-system",BlinkMacSystemFont,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  .wrap{max-width:720px;margin:0 auto;padding:20px 16px 64px;}
+
+  header.top{
+    padding:22px 20px 20px;
+    background:var(--navy);
+    color:#fff;
+    border-radius:16px;
+    margin-bottom:18px;
+  }
+  header.top .date{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    opacity:0.75;
+    margin-bottom:6px;
+  }
+  header.top h1{
+    margin:0 0 16px;
+    font-size:22px;
+    font-weight:600;
+  }
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+  .stat{
+    background:rgba(255,255,255,0.08);
+    border-radius:10px;
+    padding:10px 6px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:19px;
+    font-weight:600;
+    line-height:1.2;
+  }
+  .stat .lbl{
+    font-size:11px;
+    opacity:0.75;
+    margin-top:2px;
+  }
+  .stat.urgent .num{color:#ffb18a;}
+
+  section.panel{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:16px;
+  }
+  section.panel h2{
+    font-size:14px;
+    font-weight:600;
+    margin:0 0 12px;
+    color:var(--ink-soft);
+  }
+
+  /* Timeline */
+  .timeline-track{
+    position:relative;
+    height:6px;
+    background:var(--line);
+    border-radius:4px;
+    margin:28px 4px 10px;
+  }
+  .timeline-track .dot{
+    position:absolute;
+    top:50%;
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    border:2px solid #fff;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .timeline-axis{
+    display:flex;
+    justify-content:space-between;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    margin:0 4px;
+  }
+  .timeline-legend{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:14px;
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+  .timeline-legend span{display:inline-flex;align-items:center;gap:5px;}
+  .swatch{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .always-open-note{
+    margin-top:10px;
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+  .always-open-note a{color:var(--ink-soft);}
+
+  /* Module bars */
+  .module-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+    font-size:12.5px;
+  }
+  .module-row .m-name{
+    width:64px;
+    flex-shrink:0;
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:600;
+    color:var(--navy);
+  }
+  .module-row .m-bar-track{
+    flex:1;
+    background:var(--chip-bg);
+    border-radius:5px;
+    height:14px;
+    overflow:hidden;
+  }
+  .module-row .m-bar-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--navy),#274f7a);
+    border-radius:5px 0 0 5px;
+  }
+  .module-row .m-count{
+    width:20px;
+    text-align:right;
+    font-family:"IBM Plex Mono",monospace;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+
+  /* Section headers for job groups */
+  h2.group-title{
+    font-size:16px;
+    font-weight:600;
+    margin:26px 4px 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  h2.group-title .badge-count{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    font-weight:500;
+    color:#fff;
+    background:var(--ink-soft);
+    padding:2px 8px;
+    border-radius:20px;
+  }
+  h2.group-title.new .badge-count{background:var(--green);}
+  h2.group-title.any .badge-count{background:var(--green);}
+  h2.group-title.exp .badge-count{background:var(--navy);}
+
+  .card-list{display:flex;flex-direction:column;gap:10px;}
+  a.job-card{
+    display:block;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 14px;
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .15s ease;
+  }
+  a.job-card:active{border-color:var(--navy);}
+  .job-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .job-company{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .job-dday{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--navy);
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .job-dday.urgent{color:var(--orange);}
+  .job-title{
+    font-size:15px;
+    font-weight:600;
+    margin:2px 0 8px;
+    line-height:1.4;
+  }
+  .job-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    align-items:center;
+  }
+  .chip{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10.5px;
+    font-weight:600;
+    color:var(--chip-ink);
+    background:var(--chip-bg);
+    padding:3px 7px;
+    border-radius:5px;
+  }
+  .chip.src{
+    color:#7a6a3f;
+    background:#f4ecd8;
+  }
+  .chip.region{
+    color:var(--ink-soft);
+    background:transparent;
+    border:1px solid var(--line);
+  }
+
+  footer.foot{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:30px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="date mono">2026-08-29 (SAT) · KST</div>
+    <h1>SAP 채용 브리핑</h1>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num mono">29</div>
+        <div class="lbl">총 공고</div>
+      </div>
+      <div class="stat">
+        <div class="num mono">3</div>
+        <div class="lbl">신입</div>
+      </div>
+      <div class="stat">
+        <div class="num mono">2</div>
+        <div class="lbl">경력무관</div>
+      </div>
+      <div class="stat urgent">
+        <div class="num mono">6</div>
+        <div class="lbl">7일내 마감</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <h2>마감 타임라인</h2>
+    <div class="timeline-track">
+      <a class="dot" style="left:3.3%;background:#D9541E;" href="#job-54831565" title="(주)보령 · D-1"></a>
+      <a class="dot" style="left:3.3%;background:#D9541E;" href="#job-54615547" title="SK(주) AX · D-1"></a>
+      <a class="dot" style="left:6.7%;background:#D9541E;" href="#job-54608920" title="(주)비즈테크아이 · D-2"></a>
+      <a class="dot" style="left:13.3%;background:#D9541E;" href="#job-54837678" title="코오롱베니트(주) · D-4"></a>
+      <a class="dot" style="left:16.7%;background:#D9541E;" href="#job-54654993" title="(주)웅진 · D-5"></a>
+      <a class="dot" style="left:20.0%;background:#D9541E;" href="#job-54669788" title="제이엠씨컨설팅(주) · D-6"></a>
+      <a class="dot" style="left:33.3%;background:#16304d;" href="#job-54701853" title="(주)비즈테크아이 · D-10"></a>
+      <a class="dot" style="left:36.7%;background:#16304d;" href="#job-54696264" title="(주)블루어드 · D-11"></a>
+      <a class="dot" style="left:40.0%;background:#16304d;" href="#job-54713413" title="비에스지파트너스 · D-12"></a>
+      <a class="dot" style="left:40.0%;background:#16304d;" href="#job-54713109" title="비에스지파트너스 · D-12"></a>
+      <a class="dot" style="left:40.0%;background:#16304d;" href="#job-54713273" title="비에스지파트너스 · D-12"></a>
+      <a class="dot" style="left:66.7%;background:#16304d;" href="#job-54785868" title="(주)유한크로락스 · D-20"></a>
+      <a class="dot" style="left:66.7%;background:#1E7A5A;" href="#job-54771665" title="(주)젠컨설팅 · D-20 · 신입"></a>
+      <a class="dot" style="left:70.0%;background:#16304d;" href="#job-54799369" title="(주)제이투이 · D-21"></a>
+      <a class="dot" style="left:70.0%;background:#16304d;" href="#job-54793429" title="주식회사 솔루엠시스템즈 · D-21"></a>
+      <a class="dot" style="left:73.3%;background:#16304d;" href="#job-54870975" title="㈜지에스아이티엠 · D-22"></a>
+      <a class="dot" style="left:73.3%;background:#16304d;" href="#job-54807039" title="㈜지에스아이티엠 · D-22"></a>
+      <a class="dot" style="left:73.3%;background:#16304d;" href="#job-54807090" title="㈜지에스아이티엠 · D-22"></a>
+      <a class="dot" style="left:86.7%;background:#16304d;" href="#job-54842893" title="(주)코랩소프트 · D-26"></a>
+      <a class="dot" style="left:86.7%;background:#1E7A5A;" href="#job-54844230" title="(주)제이투이 · D-26 · 경력무관"></a>
+      <a class="dot" style="left:90.0%;background:#16304d;" href="#job-54858020" title="포레시아코리아(주) · D-27"></a>
+      <a class="dot" style="left:93.3%;background:#16304d;" href="#job-54870603" title="(주)아이디에스앤트러스트 · D-28"></a>
+      <a class="dot" style="left:96.7%;background:#1E7A5A;" href="#job-54882526" title="(주)커리어플라이 · D-29 · 신입"></a>
+      <a class="dot" style="left:100.0%;background:#16304d;" href="#job-54884296" title="주식회사 솔루엠시스템즈 · D-32"></a>
+      <a class="dot" style="left:100.0%;background:#16304d;" href="#job-54879830" title="(주)에스비티글로벌 · D-59"></a>
+    </div>
+    <div class="timeline-axis">
+      <span>오늘</span><span>7일</span><span>14일</span><span>21일</span><span>28일+</span>
+    </div>
+    <div class="timeline-legend">
+      <span><i class="swatch" style="background:#D9541E;"></i>7일 내 마감</span>
+      <span><i class="swatch" style="background:#1E7A5A;"></i>신입·경력무관</span>
+      <span><i class="swatch" style="background:#16304d;"></i>경력</span>
+    </div>
+    <div class="always-open-note">상시채용(마감일 미표기) 4건 — <a href="#job-54570480">메가존클라우드(주)</a>, <a href="#job-54745131">엑시스아이티(주)</a>, <a href="#job-54806066">(주)애커튼테크놀로지서비스</a>, <a href="#job-54336929">메가존클라우드(주)</a></div>
+  </section>
+
+  <section class="panel">
+    <h2>모듈 수요 TOP 10</h2>
+    <div class="module-row"><div class="m-name">FI</div><div class="m-bar-track"><div class="m-bar-fill" style="width:100.0%;"></div></div><div class="m-count">4</div></div>
+    <div class="module-row"><div class="m-name">CO</div><div class="m-bar-track"><div class="m-bar-fill" style="width:100.0%;"></div></div><div class="m-count">4</div></div>
+    <div class="module-row"><div class="m-name">MM</div><div class="m-bar-track"><div class="m-bar-fill" style="width:75.0%;"></div></div><div class="m-count">3</div></div>
+    <div class="module-row"><div class="m-name">SD</div><div class="m-bar-track"><div class="m-bar-fill" style="width:75.0%;"></div></div><div class="m-count">3</div></div>
+    <div class="module-row"><div class="m-name">PP</div><div class="m-bar-track"><div class="m-bar-fill" style="width:75.0%;"></div></div><div class="m-count">3</div></div>
+    <div class="module-row"><div class="m-name">BTP</div><div class="m-bar-track"><div class="m-bar-fill" style="width:50.0%;"></div></div><div class="m-count">2</div></div>
+    <div class="module-row"><div class="m-name">ABAP</div><div class="m-bar-track"><div class="m-bar-fill" style="width:25.0%;"></div></div><div class="m-count">1</div></div>
+    <div class="module-row"><div class="m-name">Ariba</div><div class="m-bar-track"><div class="m-bar-fill" style="width:25.0%;"></div></div><div class="m-count">1</div></div>
+    <div class="module-row"><div class="m-name">BRIM</div><div class="m-bar-track"><div class="m-bar-fill" style="width:25.0%;"></div></div><div class="m-count">1</div></div>
+    <div class="module-row"><div class="m-name">Basis</div><div class="m-bar-track"><div class="m-bar-fill" style="width:25.0%;"></div></div><div class="m-count">1</div></div>
+  </section>
+
+  <h2 class="group-title new">신입 <span class="badge-count">3</span></h2>
+  <div class="card-list">
+
+    <a class="job-card" id="job-54771665" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54771665" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)젠컨설팅</div>
+        <div class="job-dday">D-20</div>
+      </div>
+      <div class="job-title">(주)젠컨설팅 SAP Ariba 컨설팅 및 운영/유지보수</div>
+      <div class="job-meta">
+        <span class="chip">Ariba</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54882526" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54882526" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)커리어플라이</div>
+        <div class="job-dday">D-29</div>
+      </div>
+      <div class="job-title">[의료기기 중견기업] 영업지원 (SAP/ERP) 채용</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 성동구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54570480" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54570480" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">메가존클라우드(주)</div>
+        <div class="job-dday">상시채용</div>
+      </div>
+      <div class="job-title">SAP AMS 운영 담당자</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 과천시</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2 class="group-title any">경력무관 <span class="badge-count">2</span></h2>
+  <div class="card-list">
+
+    <a class="job-card" id="job-54844230" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54844230" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)제이투이</div>
+        <div class="job-dday">D-26</div>
+      </div>
+      <div class="job-title">[SAP SI 양재] SAP 컨설턴트 모집(해외출장가능자) (6)</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 서초구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54806066" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54806066" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)애커튼테크놀로지서비스</div>
+        <div class="job-dday">상시채용</div>
+      </div>
+      <div class="job-title">SAP BTP(PaaS) 서비스 운영 관리</div>
+      <div class="job-meta">
+        <span class="chip">BTP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 성남시 분당구</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2 class="group-title exp">경력 <span class="badge-count">24</span></h2>
+  <div class="card-list">
+
+    <a class="job-card" id="job-54831565" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54831565" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)보령</div>
+        <div class="job-dday urgent">D-1</div>
+      </div>
+      <div class="job-title">[보령] SAP ERP PP 담당자 (경력)</div>
+      <div class="job-meta">
+        <span class="chip">PP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 종로구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54615547" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54615547" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">SK(주) AX</div>
+        <div class="job-dday urgent">D-1</div>
+      </div>
+      <div class="job-title">SAP 모듈 전문가 영입</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 성남시 분당구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54608920" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54608920" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)비즈테크아이</div>
+        <div class="job-dday urgent">D-2</div>
+      </div>
+      <div class="job-title">[LG CNS 자회사] SAP 모듈(CO·FI·SD) 컨설턴트 모집(경력)</div>
+      <div class="job-meta">
+        <span class="chip">FI</span><span class="chip">CO</span><span class="chip">SD</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 중구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54837678" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54837678" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">코오롱베니트(주)</div>
+        <div class="job-dday urgent">D-4</div>
+      </div>
+      <div class="job-title">2026년 8월 경력사원 정기채용 (SAP 개발/운영(MM))</div>
+      <div class="job-meta">
+        <span class="chip">MM</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 과천시</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54654993" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54654993" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)웅진</div>
+        <div class="job-dday urgent">D-5</div>
+      </div>
+      <div class="job-title">SAP ERP컨설턴트 모집</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 중구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54669788" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54669788" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">제이엠씨컨설팅(주)</div>
+        <div class="job-dday urgent">D-6</div>
+      </div>
+      <div class="job-title">SAP BRIM(FI, FI-CA) 컨설턴트</div>
+      <div class="job-meta">
+        <span class="chip">FI</span><span class="chip">BRIM</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 마포구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54701853" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54701853" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)비즈테크아이</div>
+        <div class="job-dday">D-10</div>
+      </div>
+      <div class="job-title">SAP SM 모듈 운영 담당자(경력)</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 마포구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54696264" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54696264" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)블루어드</div>
+        <div class="job-dday">D-11</div>
+      </div>
+      <div class="job-title">(주)블루어드 SAP [BC] 컨설턴트 경력직 채용</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 송파구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54713413" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54713413" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">비에스지파트너스</div>
+        <div class="job-dday">D-12</div>
+      </div>
+      <div class="job-title">[BSG] SAP BTP(Business Technology Platform) 엔지니어</div>
+      <div class="job-meta">
+        <span class="chip">BTP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54713109" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54713109" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">비에스지파트너스</div>
+        <div class="job-dday">D-12</div>
+      </div>
+      <div class="job-title">[BSG] SAP Business AI 개발자</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54713273" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54713273" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">비에스지파트너스</div>
+        <div class="job-dday">D-12</div>
+      </div>
+      <div class="job-title">[BSG]SAP Signavio &amp; SAP LeanIX</div>
+      <div class="job-meta">
+        <span class="chip">Signavio</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54785868" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54785868" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)유한크로락스</div>
+        <div class="job-dday">D-20</div>
+      </div>
+      <div class="job-title">IT지원 (SAP ERP, MES, BI, Project Leading)</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 마포구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54799369" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54799369" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)제이투이</div>
+        <div class="job-dday">D-21</div>
+      </div>
+      <div class="job-title">[SAP SM 과천] 그룹사 SAP ERP 운영 (7)</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 과천시</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54793429" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54793429" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">주식회사 솔루엠시스템즈</div>
+        <div class="job-dday">D-21</div>
+      </div>
+      <div class="job-title">주식회사 솔루엠시스템즈 ERP SAP 시스템 개발/운영 경력 채용</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 용인시 기흥구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54870975" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54870975" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">㈜지에스아이티엠</div>
+        <div class="job-dday">D-22</div>
+      </div>
+      <div class="job-title">SAP Cloud ERP 영업 담당자 모집</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 종로구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54807039" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54807039" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">㈜지에스아이티엠</div>
+        <div class="job-dday">D-22</div>
+      </div>
+      <div class="job-title">SAP ERP 컨설턴트 모집</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 종로구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54807090" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54807090" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">㈜지에스아이티엠</div>
+        <div class="job-dday">D-22</div>
+      </div>
+      <div class="job-title">SAP ERP ABAP 개발 및 운영 담당자 모집</div>
+      <div class="job-meta">
+        <span class="chip">ABAP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 종로구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54842893" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54842893" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)코랩소프트</div>
+        <div class="job-dday">D-26</div>
+      </div>
+      <div class="job-title">[대기업/용산or상암][연간계약] 식품유통 초급 SAP CO 운영개발</div>
+      <div class="job-meta">
+        <span class="chip">CO</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 용인시 기흥구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54858020" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54858020" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">포레시아코리아(주)</div>
+        <div class="job-dday">D-27</div>
+      </div>
+      <div class="job-title">IT SAP Roll-out &amp; Process Specialist (SD·MM·PP)</div>
+      <div class="job-meta">
+        <span class="chip">MM</span><span class="chip">SD</span><span class="chip">PP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 용인시 수지구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54870603" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54870603" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)아이디에스앤트러스트</div>
+        <div class="job-dday">D-28</div>
+      </div>
+      <div class="job-title">[대웅그룹/idsTrust] SAP 모듈 담당자(SD, MM, PP, CO, FI) 채용</div>
+      <div class="job-meta">
+        <span class="chip">FI</span><span class="chip">CO</span><span class="chip">MM</span><span class="chip">SD</span><span class="chip">PP</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54884296" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54884296" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">주식회사 솔루엠시스템즈</div>
+        <div class="job-dday">D-32</div>
+      </div>
+      <div class="job-title">솔루엠시스템즈 SAP 시스템 개발/운영(계약직) 경력 채용</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 용인시 기흥구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54879830" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54879830" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">(주)에스비티글로벌</div>
+        <div class="job-dday">D-59</div>
+      </div>
+      <div class="job-title">에스비티글로벌 SAP FI/CO SM 경력자 모집</div>
+      <div class="job-meta">
+        <span class="chip">FI</span><span class="chip">CO</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54745131" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54745131" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">엑시스아이티(주)</div>
+        <div class="job-dday">상시채용</div>
+      </div>
+      <div class="job-title">[고려아연계열/엑시스아이티] SAP Admin 및 Operation 담당 채용</div>
+      <div class="job-meta">
+
+        <span class="chip src">사람인</span>
+        <span class="chip region">서울 강남구</span>
+      </div>
+    </a>
+
+    <a class="job-card" id="job-54336929" href="https://saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54336929" target="_blank" rel="noopener">
+      <div class="job-top">
+        <div class="job-company">메가존클라우드(주)</div>
+        <div class="job-dday">상시채용</div>
+      </div>
+      <div class="job-title">SAP (Basis) Technical Consultant</div>
+      <div class="job-meta">
+        <span class="chip">Basis</span>
+        <span class="chip src">사람인</span>
+        <span class="chip region">경기 과천시</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="foot">채용정보 제공: 사람인</footer>
+
+</div>
+</body>
+</html>
